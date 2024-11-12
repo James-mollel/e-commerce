@@ -6,6 +6,18 @@ from django.conf import settings
 from django.urls import reverse
 # Create your models here.
 
+class Phonenumber(models.Model):
+  phone_number = models.CharField(max_length=30, help_text="+2557 *** *** ** number ya kupokea order iwe moja Tu. ", )
+  exist = models.BooleanField(default=True)
+  created = models.DateTimeField(auto_now_add=True)
+
+  class Meta:
+    ordering = ['-created']
+  
+  def __str__(self):
+    return self.phone_number
+
+
 
 class Products(models.Model):
   product_name = models.CharField(max_length=100, null=False, blank=False)
@@ -49,10 +61,10 @@ def notifying_user(sender, instance, created, **kwargs):
   if created:
     user_emails = UserDetail.objects.values_list('email',flat=True)
 
-    product_url = f"{settings.SITE_URL}{reverse('home-web')}"
+
     message = (
       f"A new product '{instance.product_name}' is now available at Angel`s store.!\n\n "
-      f"Check it out here:  {product_url}\n\n"
+      f"Check it out at Angel Store: \n\n"
       "Thank you for staying connected with us !!!."
     )
 

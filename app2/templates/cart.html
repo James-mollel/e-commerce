@@ -48,7 +48,12 @@ Products
 
 {% endblock %}
 {% block javaScript %}
+<script>
+  const phone_Numbers = {{ phone_number|safe }};
+</script>
+
 <script src="{% static 'js/car.js' %}" defer></script>
+
 <script>
   document.getElementById('check').addEventListener('change', function(){
   const divs = document.getElementById('forme-resp')

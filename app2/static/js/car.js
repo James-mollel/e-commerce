@@ -89,15 +89,18 @@ function sendOrder(){
   }
   let orderMessage = "Order Details: \n";
   total = 0;
+  url_image = 'https://e-commerce-10sy.onrender.com'
   cart.forEach(item =>{
     orderMessage += `\n Product: '${item.name}' \n Quantity: ${item.quantity}\n `
     orderMessage += `Price: ${item.price}\n`
-    orderMessage += `Image:[view Image] (${item.image})\n`
+    orderMessage += `Image:${url_image+item.image}\n`
     total += item.price * item.quantity;
   });
   orderMessage += `\n Total: Tsh:${total}`;
+  
+  const order_number=  phone_Numbers[0]
   const whatsuppMessage = encodeURIComponent(orderMessage)
-  const whatsupp_url = `https://wa.me/+255755880249?text=${whatsuppMessage}`;
+  const whatsupp_url = `https://wa.me/${order_number}?text=${whatsuppMessage}`;
   window.open(whatsupp_url,"_blank");
   localStorage.removeItem("cart");
 }

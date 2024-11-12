@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import Products,QuickLink,UserDetail
+from .models import Products,QuickLink,UserDetail,Phonenumber
 import urllib.parse
 from django.db.models import Q
 from django.contrib import messages
@@ -8,6 +8,9 @@ from django.contrib import messages
 
 
 def cartItem(request):
+  phone_number = list(Phonenumber.objects.values_list('phone_number', flat=True))
+
+
   if request.method == 'POST':
     name = request.POST['name']
     email = request.POST['email']
@@ -23,7 +26,7 @@ def cartItem(request):
         user_detail.save()
         messages.success(request, 'Thank You Your details recorded')
         return redirect('cart-cart-items')
-  return render(request, 'cart.html')
+  return render(request, 'cart.html',{'phone_number':phone_number})
 
 
 def home(request):
@@ -41,7 +44,7 @@ def home(request):
       f"\nComment: '{comment}' "
        )
 
-    whatsupp_number = '255755880249'
+    whatsupp_number = '+255715292253'
     encode_message = urllib.parse.quote(message)
     whatsupp_url = f"https://wa.me/{whatsupp_number}?text={encode_message}"
     return redirect(whatsupp_url)
