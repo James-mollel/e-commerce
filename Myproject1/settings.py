@@ -82,6 +82,15 @@ WSGI_APPLICATION = 'Myproject1.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
 DATABASES = {'default': dj_database_url.config(default="postgresql://angelstore_user:CyQZqhjqyjvyO6hLHZpYEwUDzH4uwSrS@dpg-csoshb23esus73cbqe50-a.oregon-postgres.render.com/angelstore")}
 
 # DATABASES = dj_database_url.parse("postgresql://angelstore_user:CyQZqhjqyjvyO6hLHZpYEwUDzH4uwSrS@dpg-csoshb23esus73cbqe50-a.oregon-postgres.render.com/angelstore")
@@ -118,7 +127,7 @@ USE_I18N = True
 
 USE_TZ = True
 #site url
-SITE_URL = 'https://websitename.com'
+SITE_URL = 'https://e-commerce-10sy.onrender.com/'
 #site url
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
