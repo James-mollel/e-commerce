@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'Myproject1.wsgi.application'
 
 
 
-DATABASE = dj_database_url.parse("postgresql://angelstore_user:CyQZqhjqyjvyO6hLHZpYEwUDzH4uwSrS@dpg-csoshb23esus73cbqe50-a.oregon-postgres.render.com/angelstore")
+DATABASES = dj_database_url.parse("postgresql://angelstore_user:CyQZqhjqyjvyO6hLHZpYEwUDzH4uwSrS@dpg-csoshb23esus73cbqe50-a.oregon-postgres.render.com/angelstore")
 
 
 
