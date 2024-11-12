@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-_uoaon*hsbay8xhfaqd&!amr7uw#*ge!k$i-ns-r&on30)w+)6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["e-commerce-10sy.onrender.com",]
 # ALLOWED_HOSTS = ['127.0.0.1', '192.168.137.1']
 
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -83,23 +84,7 @@ WSGI_APPLICATION = 'Myproject1.wsgi.application'
 
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
-
-DATABASES = {
-    "default": {
-       'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-DATABASES['default'] = dj_database_url.parse("postgresql://angelstore_user:CyQZqhjqyjvyO6hLHZpYEwUDzH4uwSrS@dpg-csoshb23esus73cbqe50-a.oregon-postgres.render.com/angelstore")
+DATABASE = dj_database_url.parse("postgresql://angelstore_user:CyQZqhjqyjvyO6hLHZpYEwUDzH4uwSrS@dpg-csoshb23esus73cbqe50-a.oregon-postgres.render.com/angelstore")
 
 
 
@@ -154,6 +139,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
   BASE_DIR / "static",
 ]
+STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # Default primary key field type
