@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+header{
+  width: 100%;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+.logo{
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links{
+  display: flex;
+  list-style: none;
+}
+.nav-links li a{
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover{
+  color: #ff6347;
+}
+
+.hamburger{
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+.hamburger span{
+  background-color: white;
+  height: 3px;
+  width: 25px;
+  margin: 3px 0;
+  transition: all 0.3s;
+}
+.this-form input{
+  padding: 8px 12px;
+  border: 1px solid rgb(218, 151, 50);
+  border-radius: 5px;
+  outline: none;
+  width: 60%;
+}
+.this-form button{
+  padding: 7px 12px;
+  border: none;
+  background-color: green;
+  cursor: pointer;
+  font-size: 19px;
+  color: white;
+}
+
+@media (max-width: 768px){
+  .nav-links{
+    position: absolute; 
+    top: 62px;
+    left: -100%;
+    flex-direction: column;
+    width: 100%;
+    background-color: #333;
+    transition: left 0.5s;
+  }
+
+  .nav-links.active{
+    left: 0;
+  }
+  .hamburger{
+    display: flex;
+  }
+  .this-form{
+    margin-left: 40px;
+  }
+  .this-form input{
+    width: 50%;
+  }
+  .this-form button{
+    font-size: 17px;
+    padding: 6px 10px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo"><a href="/" style="text-decoration: none; color: white;">Angel</a></div>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="{% url 'product-web' %}">Products</a></li>
+        <li><a href="#idea">Contact us</a></li>
+        <li><a href="{% url 'cart-cart-items' %}">Cart</a></li>
+      </ul>
+
+      <div class="this-form">
+        <form action="{% url 'search-result' %}" method="get">
+           <input type="text" name="q">
+           <button type="submit">Search</button></form>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+    </nav>
+  </header>
+ <body>
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click',function(){
+      navLinks.classList.toggle('active');
+    });
+  </script>
+  
+</body>
+</html>

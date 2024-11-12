@@ -1,0 +1,231 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}
+   Home
+{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'home-web.css' %}">
+  <style>
+    .slider-containers{
+      position: relative;
+      width: 100%;
+      margin-left:  auto;
+      margin-right: auto;
+      margin-top: 130px;
+      max-width: 80%;
+      overflow: hidden;
+      border-radius: 10px;
+
+    }
+    .sliders{
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .slides{
+      min-width: 100%;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 0.5s ease;
+    }
+    
+ .sliders  h2 {
+  font-size: 48px;
+  text-align: center;
+  color: rgb(8, 36, 99);
+  padding-top: 50px;
+  margin-bottom: 5px;
+}
+
+.sliders  p{
+  text-align: center;
+  font-size: 24px;
+  color: #ff6b6b;
+  margin-bottom: 20px;
+}
+    .slider-controls{
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .slider-controls button{
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+    .slider-controls button:hover{
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    @media(max-width:768px){
+      .slides{
+        height: 200px;
+      }
+      .slides p{
+    font-size: 1rem;
+  }
+  .slides h2{
+    font-size: 2rem;
+  }
+      
+    }
+    @media (max-width: 480px){
+      .slides{
+        height: 150px;
+      }
+    }
+  </style>
+{% endblock %}
+{% block content %}
+{% include 'navigation.html' %}
+
+   <!-- hero section  -->
+   <div class="slider-containers">
+    <div class="sliders">
+      {% for produc in show_inslider %}
+      <div class="slides" style="background-image: url({{produc.product_image.url}});"> 
+         <h2>Welcome To Angel Store </h2>
+        <p>Your one-stop shop for everything You Need.</p>
+      </div>
+      {% endfor %}
+
+    </div>
+    
+    <div class="slider-controls">
+      <button class="prev" onclick="prevSlide()">&lt;</button>
+      <button class="next" onclick="nextSlide()">&gt;</button>
+    </div>
+  </div>
+
+       <!-- product sectio  -->
+       <section class="products">
+        <h2 id="productsss" >Our Trending & Hot  Products</h2>
+        <div class="product-grid" >
+          {% for produc in product %}
+          <div class="product-card">
+            <img src="{{produc.product_image.url}}" alt="product Image">
+            <h2 class="names">{{produc.product_name}}</h2>
+            <p>{{produc.selling_price|stringformat:'d'}} Tsh</p>
+            <button class="add-to-cart"
+             onclick="addToCart({{produc.id}}, '{{produc.product_name}}', {{produc.selling_price}},'{{produc.product_image.url}}',this)" >Add To Cart! </button>
+             <p style="padding: 5px 10px;">"{{produc.short_description|default:''}}"</p>
+          </div>
+          {% endfor %}
+          
+        </div>
+     
+      </section>
+      <a href="{% url 'product-web' %}" style="text-decoration: none; padding: 10px; background: red; margin-top: 20px; margin-left: 20px; border-radius: 5px; color: white;">See More &gt; &gt;</a>
+     
+    
+
+
+     <section class="about">
+      <div class="slider-cotainer">
+        <div class="slider">
+          <div class="slide">
+            <p>"Great Products and amazing service!"</p>
+          </div>
+    
+          <div class="slide">
+            <p>"Fast delivery and fantastic quality!"</p>
+          </div>
+    
+          <div class="slide">
+            <p>"The best e-commerce experience I`ve had so far!"</p>
+          </div>
+    
+          <div class="slide">
+            <p>"Customer support was very helpful and responsive!"</p>
+          </div>
+    
+        </div>
+      </div>
+     </section>
+
+     <!-- commments  -->
+     <div class="form-container" id="idea">
+      <h2>Leave Your Thougth</h2>
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="firstName"> Name: </label>
+          <input type="text" id="firstName" name="name" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="Phone Number">Phone Number </label>
+          <input type="tel" id="phone" name="phone" required maxlength="10">
+        </div>
+  
+        <div class="form-group">
+          <label for="Gender">Comment: </label>
+         <textarea name="comment" required id="" placeholder="Write You Comment......." cols="10"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Submit</button>
+  
+      </form>
+    </div>
+  <!-- comments  -->
+
+     <!-- about section  -->
+     <section id="about" class="about">
+      <h2>About Us</h2>
+      <P>Angel Store We are committed to providing high-quality products at the best prices. Our mission is to make shopping easy and accessesible for everyone Thank You <br>
+        {% if all_link %}
+        <br> Quick Link <br>
+        <ul style="list-style: none; padding: 10px 12px ;">
+          {% for links in all_link %}
+        <li>{{links.platform_name}} <a href="{{links.url}}" target="_blank">Angel Store</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+   </P>
+     </section>
+         
+
+   <h1>back To Top</h1>
+
+     <footer class="footer">
+      <p>&copy; <span id="copy"></span> <a href="" style="color: white;">Angel Shop</a>. All rigths reserved</p>
+     </footer>
+
+{% endblock %}
+{% block javaScript %}
+<script src="{% static 'js/car.js' %}" defer></script> 
+<script src="{% static 'js/home-web.js' %}" defer></script> 
+<script >
+  let currentSlider = 0;
+  function showSlide(){
+    const slides = document.querySelectorAll('.slides');
+    const slider = document.querySelector('.sliders');
+    if(currentSlider >= slides.length)  currentSlider = 0;
+  if(currentSlider < 0) currentSlider = slides.length -1;
+
+   slider.style.transform = `translateX(-${currentSlider * 100}%)`;
+    }
+
+  function nextSlide(){
+    currentSlider ++;
+    showSlide();
+  }
+  function prevSlide(){
+    currentSlider --;
+    showSlide();
+  }
+  setInterval(nextSlide, 5000);
+  showSlide();
+
+</script>
+
+  {% endblock %}
+
+
+ 

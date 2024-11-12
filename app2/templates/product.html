@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}
+Products
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'home-web.css' %}">
+{% endblock %}
+
+
+{% block content %}
+{% include 'navigation.html' %}
+<div style="margin-top: 100px;">
+   <section class="products">
+    <h2>Our Products</h2>
+    <div class="product-grid">
+    {% for product in all_prod %}
+    <div class="product-card">
+      <img src="{{product.product_image.url}}" alt="product Image">
+      <h2 class="names">{{product.product_name}}</h2>
+      <p>{{product.selling_price|stringformat:'d'}} Tsh</p>
+      <button class="add-to-cart" id="cart-btn" onclick="addToCart({{product.id}}, '{{product.product_name}}', {{product.selling_price}},'{{product.product_image.url}}', this)">Add To Cart! </button>
+      <p style="padding: 5px 10px;">"{{product.short_description|default:''}}"</p>
+
+    </div>
+      {% endfor %}
+     
+    </div>
+  </section>
+</div>
+
+
+ <footer class="footer">
+  <p>&copy; <span id="copy"></span> Angel Store. All rigths reserved</p>
+ </footer>
+
+{% endblock %}
+{% block javaScript %}
+<script src="{% static 'js/car.js' %}" defer></script>
+
+<!-- <script src="{% static 'js/home-web.js' %}" defer></script>  -->
+{% endblock %}

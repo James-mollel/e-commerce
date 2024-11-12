@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}
+Products
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'cart.css' %}">
+<link rel="stylesheet" href="{% static 'home-web.css' %}">
+
+{% endblock %}
+{% block content %}
+{% include 'navigation-no-sach.html' %}
+<div class="all-all">
+  {% include 'messages.html' %}
+  <p style="font-size: 24px; text-align: center;"> <input type="checkbox" id="check" style="padding: 10px; width: 25px; height: 20px;">  
+    <b style="border-bottom: 2px solid red;">Would you like us to notify you when a new product enters the market?</b> </p>
+  <div class="forms-response" id="forme-resp">
+
+    <form action="" method="post">
+      {% csrf_token %}
+      <label for="">Your name: </label>
+      <input type="text" name="name" required id="">
+      <label for="">Your email: </label>
+      <input type="email" name="email" required id="">
+      <button type="submit">submit</button>
+    </form>
+
+  </div>
+</div>
+
+   <div class="container">
+    <h1>Your Cart</h1>
+    <div id="cart-items-container" class="cart-items-container">
+      <p>Loading your cart items....</p>
+    </div>
+    <div class="cart-summary">
+      <h2>Total: Tsh <span id="total-price">0.00</span></h2>
+      <button class="order-button" onclick="sendOrder()">Order Now</button>
+    </div>
+   </div>
+
+   
+
+ <footer class="footer">
+  <p>&copy; <span id="copy"></span> <a href="" style="color: white;">Court Tech Crew 0755 880 249</a>. All rigths reserved</p>
+ </footer>
+
+{% endblock %}
+{% block javaScript %}
+<script src="{% static 'js/car.js' %}" defer></script>
+<script>
+  document.getElementById('check').addEventListener('change', function(){
+  const divs = document.getElementById('forme-resp')
+  divs.style.display = this.checked? 'block':'none';
+     
+  });
+ 
+</script>
+
+{% endblock %}
